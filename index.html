@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carminia Café — Café de especialidad en Burzaco</title>
+  <meta name="description" content="Carminia Café: café de especialidad, pastelería casera y brunch en Burzaco, Almirante Brown. Un rincón verde para disfrutar sin apuro.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <style>
+    :root {
+      --verde-oscuro: #1e3d2f;
+      --verde: #2e5d43;
+      --verde-medio: #4a7c59;
+      --verde-suave: #9db8a1;
+      --crema: #f6f3ec;
+      --crema-oscuro: #ece7db;
+      --arena: #d9cfb8;
+      --tinta: #22302a;
+      --blanco: #fdfcf9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--crema);
+      color: var(--tinta);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; }
+
+    .contenedor { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(246, 243, 236, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--crema-oscuro);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 600;
+      color: var(--verde-oscuro); text-decoration: none; letter-spacing: 0.02em;
+    }
+    .logo span { color: var(--verde-medio); font-style: italic; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--tinta); font-size: 0.95rem;
+      font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--verde-medio); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse 60% 45% at 50% 110%, rgba(46, 93, 67, 0.14), transparent),
+        var(--crema);
+      padding: 120px 24px 80px;
+    }
+    .hero-etiqueta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.8rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--verde-medio); font-weight: 500; margin-bottom: 28px;
+    }
+    .hero-etiqueta::before, .hero-etiqueta::after {
+      content: ""; width: 36px; height: 1px; background: var(--verde-suave);
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 9vw, 5.8rem);
+      color: var(--verde-oscuro); line-height: 1.05; font-weight: 500;
+      max-width: 14ch;
+    }
+    .hero h1 em { font-style: italic; color: var(--verde-medio); }
+    .hero p {
+      margin-top: 26px; font-size: 1.15rem; max-width: 44ch; color: #4c5a52;
+    }
+    .hero-botones { margin-top: 42px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .boton {
+      display: inline-block; padding: 15px 34px; border-radius: 100px;
+      text-decoration: none; font-size: 0.92rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s;
+    }
+    .boton-primario { background: var(--verde); color: var(--blanco); }
+    .boton-primario:hover { background: var(--verde-oscuro); transform: translateY(-2px); }
+    .boton-secundario {
+      color: var(--verde); border: 1px solid var(--verde-suave); background: transparent;
+    }
+    .boton-secundario:hover { border-color: var(--verde); background: rgba(46, 93, 67, 0.06); }
+
+    .hero-hoja {
+      position: absolute; font-size: 1.4rem; opacity: 0.5; user-select: none; pointer-events: none;
+    }
+
+    /* ---------- Secciones ---------- */
+    section { padding: 100px 0; }
+    .titulo-seccion {
+      text-align: center; margin-bottom: 64px;
+    }
+    .titulo-seccion .mini {
+      font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--verde-medio); font-weight: 500; display: block; margin-bottom: 12px;
+    }
+    .titulo-seccion h2 {
+      font-size: clamp(2rem, 5vw, 2.9rem); color: var(--verde-oscuro);
+    }
+
+    /* ---------- Nosotros ---------- */
+    .nosotros { background: var(--verde-oscuro); color: var(--crema); }
+    .nosotros .titulo-seccion .mini { color: var(--verde-suave); }
+    .nosotros .titulo-seccion h2 { color: var(--crema); }
+    .nosotros-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    }
+    @media (max-width: 760px) { .nosotros-grid { grid-template-columns: 1fr; } }
+    .nosotros-card {
+      background: rgba(253, 252, 249, 0.05);
+      border: 1px solid rgba(157, 184, 161, 0.25);
+      border-radius: 18px; padding: 38px 30px; text-align: center;
+    }
+    .nosotros-card .icono { font-size: 2rem; display: block; margin-bottom: 18px; }
+    .nosotros-card h3 { font-size: 1.25rem; margin-bottom: 12px; color: var(--arena); }
+    .nosotros-card p { font-size: 0.98rem; color: var(--verde-suave); }
+
+    /* ---------- Menú ---------- */
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px 72px;
+      max-width: 880px; margin: 0 auto;
+    }
+    @media (max-width: 720px) { .menu-grid { grid-template-columns: 1fr; } }
+    .menu-col h3 {
+      font-size: 1.4rem; color: var(--verde-oscuro); margin-bottom: 24px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--arena);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .menu-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; padding: 10px 0;
+    }
+    .menu-item .nombre { font-weight: 400; font-size: 1.02rem; }
+    .menu-item .detalle { font-size: 0.88rem; color: #6b756f; display: block; }
+    .menu-item .puntos {
+      flex: 1; border-bottom: 1px dotted var(--verde-suave); min-width: 24px;
+      transform: translateY(-4px);
+    }
+    .menu-nota {
+      text-align: center; margin-top: 56px; font-size: 0.95rem; color: #6b756f;
+      font-style: italic;
+    }
+
+    /* ---------- Horarios + Ubicación ---------- */
+    .visita { background: var(--crema-oscuro); }
+    .visita-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      max-width: 880px; margin: 0 auto;
+    }
+    @media (max-width: 720px) { .visita-grid { grid-template-columns: 1fr; } }
+    .visita-card {
+      background: var(--blanco); border-radius: 18px; padding: 42px 36px;
+      border: 1px solid var(--arena);
+    }
+    .visita-card h3 {
+      color: var(--verde-oscuro); font-size: 1.3rem; margin-bottom: 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .horario-fila {
+      display: flex; justify-content: space-between; padding: 9px 0;
+      border-bottom: 1px solid var(--crema-oscuro); font-size: 0.98rem;
+    }
+    .horario-fila:last-child { border-bottom: none; }
+    .horario-fila .dia { color: #56645c; }
+    .horario-fila .hora { font-weight: 400; color: var(--verde-oscuro); }
+    .visita-card p { font-size: 0.98rem; color: #56645c; margin-bottom: 8px; }
+    .visita-card .boton { margin-top: 22px; padding: 13px 28px; font-size: 0.85rem; }
+
+    /* ---------- Frase ---------- */
+    .frase {
+      text-align: center; padding: 110px 24px;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(46, 93, 67, 0.08), transparent),
+        var(--crema);
+    }
+    .frase blockquote {
+      font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 4vw, 2.3rem);
+      color: var(--verde); font-style: italic; max-width: 26ch; margin: 0 auto;
+      line-height: 1.4;
+    }
+    .frase .firma {
+      margin-top: 24px; font-size: 0.85rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--verde-medio);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--verde-oscuro); color: var(--verde-suave);
+      padding: 56px 24px 36px; text-align: center;
+    }
+    footer .logo-footer {
+      font-family: 'Fraunces', serif; font-size: 1.6rem; color: var(--crema);
+      margin-bottom: 10px;
+    }
+    footer .zona { font-size: 0.95rem; margin-bottom: 26px; }
+    footer .enlaces { display: flex; gap: 24px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap; }
+    footer .enlaces a {
+      color: var(--arena); text-decoration: none; font-size: 0.9rem;
+      letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s;
+    }
+    footer .enlaces a:hover { color: var(--blanco); }
+    footer .creditos {
+      font-size: 0.8rem; opacity: 0.6;
+      border-top: 1px solid rgba(157, 184, 161, 0.2); padding-top: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="#">Carminia <span>Café</span></a>
+      <ul class="nav-links">
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#visitanos">Visitanos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="hero-hoja" style="top: 18%; left: 12%; transform: rotate(-20deg);">🌿</span>
+    <span class="hero-hoja" style="top: 30%; right: 10%; transform: rotate(25deg); font-size: 1.8rem;">🍃</span>
+    <span class="hero-hoja" style="bottom: 22%; left: 18%; transform: rotate(10deg); font-size: 1.1rem;">🍃</span>
+    <span class="hero-hoja" style="bottom: 16%; right: 16%; transform: rotate(-15deg);">🌿</span>
+
+    <span class="hero-etiqueta">Burzaco · Almirante Brown</span>
+    <h1>Un rincón <em>verde</em> para tu café de todos los días</h1>
+    <p>Café de especialidad, pastelería casera y un espacio pensado para quedarse. Te esperamos en Carminia.</p>
+    <div class="hero-botones">
+      <a class="boton boton-primario" href="#menu">Ver el menú</a>
+      <a class="boton boton-secundario" href="https://www.google.com/maps/place/Carminia+Caf%C3%A9/@-34.7763438,-58.4050123,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcd3001dcc42d5:0xcb14a5a820d39179!8m2!3d-34.7763438!4d-58.4050123!16s%2Fg%2F11w4ystm8l" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+  </header>
+
+  <section class="nosotros" id="nosotros">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <span class="mini">Nuestra esencia</span>
+        <h2>Hecho con calma, servido con cariño</h2>
+      </div>
+      <div class="nosotros-grid">
+        <div class="nosotros-card">
+          <span class="icono">☕</span>
+          <h3>Café de especialidad</h3>
+          <p>Granos seleccionados y métodos cuidados, desde el espresso clásico hasta el filtrado del día.</p>
+        </div>
+        <div class="nosotros-card">
+          <span class="icono">🥐</span>
+          <h3>Pastelería casera</h3>
+          <p>Horneamos todos los días: medialunas, tortas, budines y opciones para acompañar cada momento.</p>
+        </div>
+        <div class="nosotros-card">
+          <span class="icono">🪴</span>
+          <h3>Un espacio para quedarse</h3>
+          <p>Ambiente tranquilo, verde y luminoso. Ideal para leer, trabajar o encontrarte con alguien querido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <span class="mini">Para tentarte</span>
+        <h2>Nuestro menú</h2>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-col">
+          <h3>☕ Cafetería</h3>
+          <div class="menu-item"><span class="nombre">Espresso</span><span class="puntos"></span></div>
+          <div class="menu-item"><span class="nombre">Cortado / Lágrima</span><span class="puntos"></span></div>
+          <div class="menu-item"><div><span class="nombre">Flat white</span><span class="detalle">Doble espresso con leche texturizada</span></div><span class="puntos"></span></div>
+          <div class="menu-item"><span class="nombre">Cappuccino</span><span class="puntos"></span></div>
+          <div class="menu-item"><div><span class="nombre">Iced latte</span><span class="detalle">Frío, con o sin saborizar</span></div><span class="puntos"></span></div>
+          <div class="menu-item"><span class="nombre">Té e infusiones</span><span class="puntos"></span></div>
+        </div>
+        <div class="menu-col">
+          <h3>🥐 Dulces &amp; brunch</h3>
+          <div class="menu-item"><span class="nombre">Medialunas de manteca</span><span class="puntos"></span></div>
+          <div class="menu-item"><div><span class="nombre">Torta del día</span><span class="detalle">Consultá la vitrina</span></div><span class="puntos"></span></div>
+          <div class="menu-item"><span class="nombre">Budines y cookies</span><span class="puntos"></span></div>
+          <div class="menu-item"><div><span class="nombre">Tostones</span><span class="detalle">Palta, huevo o dulces</span></div><span class="puntos"></span></div>
+          <div class="menu-item"><span class="nombre">Tostados</span><span class="puntos"></span></div>
+          <div class="menu-item"><span class="nombre">Opciones sin TACC</span><span class="puntos"></span></div>
+        </div>
+      </div>
+      <p class="menu-nota">Preguntanos por las promos del día y las opciones veggie ✿</p>
+    </div>
+  </section>
+
+  <section class="visita" id="visitanos">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <span class="mini">Te esperamos</span>
+        <h2>Visitanos</h2>
+      </div>
+      <div class="visita-grid">
+        <div class="visita-card">
+          <h3>🕐 Horarios</h3>
+          <div class="horario-fila"><span class="dia">Lunes a viernes</span><span class="hora">8:00 – 20:00</span></div>
+          <div class="horario-fila"><span class="dia">Sábados</span><span class="hora">9:00 – 20:30</span></div>
+          <div class="horario-fila"><span class="dia">Domingos</span><span class="hora">9:00 – 13:00</span></div>
+        </div>
+        <div class="visita-card">
+          <h3>📍 Dónde estamos</h3>
+          <p>Burzaco, Almirante Brown<br>Buenos Aires, Argentina</p>
+          <p>Encontranos fácil desde el mapa:</p>
+          <a class="boton boton-primario" href="https://www.google.com/maps/place/Carminia+Caf%C3%A9/@-34.7763438,-58.4050123,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcd3001dcc42d5:0xcb14a5a820d39179!8m2!3d-34.7763438!4d-58.4050123!16s%2Fg%2F11w4ystm8l" target="_blank" rel="noopener">Abrir en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frase">
+    <blockquote>“El buen café no se apura: se disfruta.”</blockquote>
+    <div class="firma">— Carminia Café</div>
+  </section>
+
+  <footer>
+    <div class="logo-footer">Carminia Café</div>
+    <div class="zona">Burzaco · Almirante Brown · Buenos Aires</div>
+    <div class="enlaces">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#menu">Menú</a>
+      <a href="#visitanos">Visitanos</a>
+      <a href="https://www.google.com/maps/place/Carminia+Caf%C3%A9/@-34.7763438,-58.4050123,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcd3001dcc42d5:0xcb14a5a820d39179!8m2!3d-34.7763438!4d-58.4050123!16s%2Fg%2F11w4ystm8l" target="_blank" rel="noopener">Google Maps</a>
+    </div>
+    <div class="creditos">© 2026 Carminia Café — Todos los derechos reservados</div>
+  </footer>
+
+</body>
+</html>
