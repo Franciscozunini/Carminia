@@ -2,22 +2,41 @@
 
 Landing page estática para **Carminia Café** (Burzaco, Almirante Brown, Buenos Aires).
 
-> Esta rama (`rediseno-v2`) contiene el rediseño completo del sitio: nueva paleta, tipografía, estructura de componentes y sistema de animaciones. La versión anterior vive en la rama `claude/carminia-cafe-website-yg2moo`.
+> Esta rama (`rediseno-v2`) contiene el rediseño completo del sitio, hecho siguiendo
+> las skills de diseño del repo (`.claude/skills/`): `web-diseno-premium`,
+> `emil-design-eng`, `apple-design` y `ui-ux-pro-max`.
 
 ## Contenido
 
 - `index.html` — página completa (HTML + CSS en un solo archivo, sin dependencias de build).
+- `.claude/skills/` — skills de diseño que guían cualquier rediseño futuro.
 
-## Características
+## Sistema de diseño
 
-- **Design tokens**: paleta verde (del verde noche al salvia, con papel y dorado), escala tipográfica fluida, espaciado y curvas de easing definidos como variables CSS.
-- **Tipografía**: Instrument Serif (display) + Figtree (texto), vía Google Fonts.
-- **Componentes**: nav (se oculta al bajar y reaparece al subir, con menú móvil a pantalla completa), hero, marquee, experiencia editorial numerada, cita interludio, feed de Instagram, mapa + tarjetas de visita, cierre CTA y footer. Cada uno con su bloque de CSS documentado.
-- **Fotos reales**: el sitio incrusta el feed oficial de Instagram de [@carminiacafe](https://www.instagram.com/carminiacafe/), así las fotos siempre son las del local y se actualizan solas.
+- **Paleta**: verde botánico sobre papel claro (`--hoja #1F4A32`, `--papel #F1F2EA`,
+  `--hoja-oscura #122B1E`, `--salvia #A9C0AE`) con acento ámbar de horno (`--ambar #8F6118`).
+  Tokens semánticos como variables CSS; los componentes no usan hex directo.
+- **Tipografía**: Bricolage Grotesque (display, con eje óptico y pesos 260–750) +
+  Public Sans (texto) + JetBrains Mono (etiquetas y datos), vía Google Fonts.
+  Tracking negativo e interlineado apretado solo en tamaños display.
+- **Elemento firma**: *la pizarra de la barra* — un panel mono estilo ticket en el hero
+  que muestra el estado real del local (abierto/cerrado calculado con la hora de
+  Buenos Aires), la hora local y el horario del día. Se repite como línea de estado
+  en la sección de visita.
+- **Componentes**: nav translúcida (el contenido pasa por debajo; sombra suave al
+  scrollear en vez de borde duro), hero tipográfico asimétrico, carta de la barra en
+  filas con etiqueta mono, feed de Instagram, mapa + fichas de visita, cierre y footer
+  con marca gigante.
+- **Movimiento**: dos momentos — entrada del hero (CSS `@starting-style`, sin JS) y
+  aparición en scroll con stagger de 60 ms. Transiciones (no keyframes), curvas
+  custom, botones con `scale(0.97)` al presionar. Respeta `prefers-reduced-motion`,
+  `prefers-reduced-transparency` y `prefers-contrast`.
+- **Fotos reales**: el sitio incrusta el feed oficial de Instagram de
+  [@carminiacafe](https://www.instagram.com/carminiacafe/), así las fotos siempre son
+  las del local y se actualizan solas. Sin fotos de stock.
 - **Ubicación**: mapa interactivo de Google Maps incrustado con el pin exacto del café.
-- **Movimiento**: sistema de aparición en scroll con stagger (`data-reveal`), textura de grano, micro-interacciones en botones y links. Todo respeta `prefers-reduced-motion`.
-- **Accesibilidad**: skip link, landmarks semánticos, `aria-expanded` en el menú, foco visible, contraste cuidado.
-- Diseño responsive. Un solo archivo, sin dependencias ni build. Sin fotos de stock.
+- **Accesibilidad**: skip link, landmarks semánticos, `aria-expanded` en el menú, foco
+  visible, contraste ≥ 4.5:1, íconos SVG (sin emojis), áreas táctiles ≥ 44 px.
 
 ## Cómo verla
 
@@ -27,4 +46,6 @@ Abrí `index.html` en el navegador, o publicala con GitHub Pages (Settings → P
 
 ## Datos a ajustar
 
-Los horarios son de ejemplo — editalos directamente en `index.html` (sección `#visitanos`).
+Los horarios son de ejemplo — editalos en `index.html` en **dos** lugares que deben
+coincidir: la tabla visible (sección `#visitanos`) y la constante `HORARIOS` del
+script (que calcula el estado abierto/cerrado de la pizarra).
