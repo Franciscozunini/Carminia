@@ -1,6 +1,8 @@
-# Carminia Café — Landing Page
+# Carminia Café — Landing Page (rediseño v2)
 
 Landing page estática para **Carminia Café** (Burzaco, Almirante Brown, Buenos Aires).
+
+> Esta rama (`rediseno-v2`) contiene el rediseño completo del sitio: nueva paleta, tipografía, estructura de componentes y sistema de animaciones. La versión anterior vive en la rama `claude/carminia-cafe-website-yg2moo`.
 
 ## Contenido
 
@@ -8,13 +10,14 @@ Landing page estática para **Carminia Café** (Burzaco, Almirante Brown, Buenos
 
 ## Características
 
-- Paleta verde predominante (verde noche, bosque y salvia) con acentos crema y dorado.
-- Tipografías: Fraunces (títulos) + Jost (texto), vía Google Fonts.
-- Secciones: hero limpio con sello giratorio, cinta marquee, nosotros, feed de Instagram, mapa de ubicación y frase de cierre.
+- **Design tokens**: paleta verde (del verde noche al salvia, con papel y dorado), escala tipográfica fluida, espaciado y curvas de easing definidos como variables CSS.
+- **Tipografía**: Instrument Serif (display) + Figtree (texto), vía Google Fonts.
+- **Componentes**: nav (se oculta al bajar y reaparece al subir, con menú móvil a pantalla completa), hero, marquee, experiencia editorial numerada, cita interludio, feed de Instagram, mapa + tarjetas de visita, cierre CTA y footer. Cada uno con su bloque de CSS documentado.
 - **Fotos reales**: el sitio incrusta el feed oficial de Instagram de [@carminiacafe](https://www.instagram.com/carminiacafe/), así las fotos siempre son las del local y se actualizan solas.
-- **Ubicación**: mapa interactivo de Google Maps incrustado con el pin exacto del café, más botón "Cómo llegar".
-- Animaciones: aparición al hacer scroll (IntersectionObserver), hojas flotantes, hovers. Respeta `prefers-reduced-motion`.
-- Diseño responsive. Un solo archivo, JS mínimo. Sin fotos de stock.
+- **Ubicación**: mapa interactivo de Google Maps incrustado con el pin exacto del café.
+- **Movimiento**: sistema de aparición en scroll con stagger (`data-reveal`), textura de grano, micro-interacciones en botones y links. Todo respeta `prefers-reduced-motion`.
+- **Accesibilidad**: skip link, landmarks semánticos, `aria-expanded` en el menú, foco visible, contraste cuidado.
+- Diseño responsive. Un solo archivo, sin dependencias ni build. Sin fotos de stock.
 
 ## Cómo verla
 
