@@ -1,5 +1,5 @@
 import Reveal from './Reveal.jsx'
-import { Divisor } from './Motivo.jsx'
+import { Divisor, Corona } from './Motivo.jsx'
 
 // Galería editorial asimétrica con las 3 fotos reales. Evita a propósito el
 // patrón genérico de fotos redondeadas superpuestas en diagonal.
@@ -29,6 +29,9 @@ export default function Galeria() {
     <section id="galeria" className="relative bg-gradient-to-b from-noche to-bosque py-24 sm:py-32">
       <div className="contenedor">
         <div className="mb-14 text-center">
+          <Reveal>
+            <Corona className="mb-4" />
+          </Reveal>
           <Reveal as="span" className="kicker mb-3">
             Adentro
           </Reveal>

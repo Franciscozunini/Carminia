@@ -43,6 +43,17 @@ export function Marca({ className = '', compacta = false }) {
   )
 }
 
+// Corona: el arco chico que encabeza cada sección. Hace que el motivo aparezca
+// de forma deliberada y reconocible en todo el sitio, no una sola vez.
+export function Corona({ className = '', align = 'center' }) {
+  return (
+    <Portal
+      className={`h-8 w-7 text-vela/75 ${align === 'center' ? 'mx-auto' : ''} ${className}`}
+      strokeWidth={6}
+    />
+  )
+}
+
 // Divisor entre secciones: línea fina + portal al centro.
 export function Divisor({ className = '' }) {
   return (

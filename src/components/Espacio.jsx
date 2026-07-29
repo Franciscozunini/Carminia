@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx'
+import { Corona } from './Motivo.jsx'
 
 const RASGOS = [
   {
@@ -24,6 +25,9 @@ export default function Espacio() {
       <div className="contenedor grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
         {/* Texto con personalidad */}
         <div>
+          <Reveal>
+            <Corona align="left" className="mb-4" />
+          </Reveal>
           <Reveal as="span" className="kicker mb-4">
             Quiénes somos
           </Reveal>

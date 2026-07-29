@@ -47,6 +47,20 @@ export default function Pizarra() {
               Te esperamos con el café recién hecho y las velas encendidas. La luz de
               la vereda avisa cuando estamos.
             </p>
+
+            {/* @carminiacafe reubicado acá (fuera del hero) */}
+            <a
+              href="https://www.instagram.com/carminiacafe/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="boton-arco boton-arco-borde mt-4"
+            >
+              @carminiacafe
+            </a>
+
+            <p className="mt-2 font-sans text-xs uppercase tracking-[0.14em] text-salvia/70">
+              Burzaco · Almirante Brown
+            </p>
           </div>
         </div>
       </div>

@@ -10,23 +10,28 @@ const ENLACES = [
 ]
 
 export default function Nav() {
-  const [compacta, setCompacta] = useState(false)
+  // La nav NO flota sobre el hero (fidelidad Bellhop). Aparece recién cuando
+  // se pasó la imagen a pantalla completa.
+  const [visible, setVisible] = useState(false)
   const estado = useEstadoLocal()
 
   useEffect(() => {
-    const onScroll = () => setCompacta(window.scrollY > 40)
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   return (
     <nav
+      aria-hidden={!visible}
       className={[
-        'fixed inset-x-0 top-0 z-50 transition-colors duration-500',
-        compacta
-          ? 'border-b border-salvia/15 bg-noche/80 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent',
+        'fixed inset-x-0 top-0 z-50 border-b border-salvia/15 bg-noche/85 backdrop-blur-md transition-all duration-500',
+        visible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0',
       ].join(' ')}
     >
       <div className="mx-auto flex max-w-[1160px] items-center justify-between px-6 py-4">
@@ -48,7 +53,6 @@ export default function Nav() {
         </ul>
 
         <div className="flex items-center gap-4">
-          {/* Estado en vivo, también en la barra */}
           <span className="hidden items-center gap-2 text-xs uppercase tracking-[0.14em] text-salvia sm:inline-flex">
             <span
               className={[
@@ -64,6 +68,7 @@ export default function Nav() {
             target="_blank"
             rel="noopener noreferrer"
             className="boton-arco boton-arco-borde !px-4 !py-2 !text-xs"
+            tabIndex={visible ? 0 : -1}
           >
             @carminiacafe
           </a>

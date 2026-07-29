@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx'
+import { Corona } from './Motivo.jsx'
 import { HORARIOS_LEGIBLES } from '../lib/horario.js'
 import { useEstadoLocal } from '../hooks/useEstadoLocal.js'
 
@@ -14,6 +15,9 @@ export default function Visita() {
     <section id="visita" className="relative bg-noche py-24 sm:py-32">
       <div className="contenedor">
         <div className="mb-14 text-center">
+          <Reveal>
+            <Corona className="mb-4" />
+          </Reveal>
           <Reveal as="span" className="kicker mb-3">
             Te esperamos
           </Reveal>

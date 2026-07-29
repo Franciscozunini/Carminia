@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx'
+import { Corona } from './Motivo.jsx'
 
 // Feed real de @carminiacafe embebido con el widget oficial de Instagram.
 export default function Instagram() {
@@ -6,6 +7,9 @@ export default function Instagram() {
     <section id="instagram" className="relative bg-bosque py-24 sm:py-32">
       <div className="contenedor">
         <div className="mb-12 text-center">
+          <Reveal>
+            <Corona className="mb-4" />
+          </Reveal>
           <Reveal as="span" className="kicker mb-3">
             Día a día
           </Reveal>
