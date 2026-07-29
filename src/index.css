@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-noche text-crema font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, blockquote {
+    @apply font-display;
+  }
+
+  /* Foco visible y consistente en todo el sitio (accesibilidad). */
+  :focus-visible {
+    outline: 2px solid theme('colors.vela');
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: theme('colors.musgo');
+    color: theme('colors.hueso');
+  }
+
+  /* Respeto total por quien pide menos movimiento. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---- Botón con forma custom: arco / portal (no el rectángulo genérico) ----
+     El borde superior es un arco pleno y la base apenas redondeada: evoca la
+     puerta y los marcos en arco del local. Es el gesto de identidad propio. */
+  .boton-arco {
+    @apply relative inline-flex items-center justify-center gap-2
+           px-7 pt-3.5 pb-3 text-sm font-medium uppercase tracking-[0.14em]
+           transition-all duration-300 ease-out;
+    border-radius: 999px 999px 10px 10px;
+  }
+  .boton-arco-solido {
+    @apply bg-vela text-noche;
+  }
+  .boton-arco-solido:hover {
+    @apply bg-resplandor -translate-y-0.5;
+    box-shadow: 0 14px 34px -10px rgba(207, 154, 78, 0.55);
+  }
+  .boton-arco-borde {
+    @apply text-crema;
+    border: 1px solid rgba(196, 211, 198, 0.35);
+  }
+  .boton-arco-borde:hover {
+    @apply -translate-y-0.5 border-vela text-hueso;
+    background: rgba(207, 154, 78, 0.08);
+  }
+
+  .contenedor {
+    @apply mx-auto w-full max-w-[1160px] px-6;
+  }
+
+  .kicker {
+    @apply block font-sans text-xs font-medium uppercase tracking-marca text-vela;
+  }
+}
