@@ -1,6 +1,10 @@
 node_modules
 dist
+dist-preview
 dist-ssr
+
+# Artefactos de preview (build empaquetado para abrir local)
+carminia-preview.zip
 *.local
 .DS_Store
 .vite
