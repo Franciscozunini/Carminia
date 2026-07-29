@@ -1,0 +1,54 @@
+name: Deploy a GitHub Pages
+
+# Publica la landing (build de Vite) en GitHub Pages desde la rama de trabajo.
+on:
+  push:
+    branches: [claude/carminia-cafe-rebuild-hpdru0]
+  workflow_dispatch:
+
+# Permisos que necesita el deploy oficial de Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo deploy a la vez; no cancela el que está corriendo.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      # Habilita Pages (modo "GitHub Actions") vía API si aún no lo está.
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@v4
