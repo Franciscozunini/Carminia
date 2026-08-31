@@ -1,27 +1,66 @@
-# Carminia Café — Landing Page
+# HaulWise — Owner-Operator Money Dashboard
 
-Landing page estática para **Carminia Café** (Burzaco, Almirante Brown, Buenos Aires).
+Factoring-aware financial decision tools for US owner-operator truckers. Built
+as a differentiated MVP: not another cost-per-mile calculator, but a
+**factoring-aware, profile-persistent decision engine**.
 
-## Contenido
+Research and rationale live in the `niche-research` repo
+(`owner-operator-trucking-hub/BLUEPRINT.md`).
 
-- `index.html` — página completa (HTML + CSS en un solo archivo, sin dependencias de build).
+## What it does
 
-## Características
+- **Money Dashboard** (`/factoring/calculator`) — the killer tool. Set your truck
+  up once (saved in your browser), analyze your real all-in factoring cost, and
+  get a take / negotiate / skip verdict on any load, net of your own factoring
+  and dispatch.
+- **Factoring comparison** (`/factoring/compare`, `/factoring/[provider]`) —
+  neutral, structured, with every unverified figure shown as `UNKNOWN`.
+- **Focused calculators** — `/owner-operator-profit-calculator`,
+  `/break-even-rate-calculator`, `/load-profit-calculator`.
+- **Trust pages** — `/methodology`, `/how-we-make-money`, `/about`, `/disclaimer`.
 
-- Paleta verde predominante (verde noche, bosque y salvia) con acentos crema y dorado.
-- Tipografías: Fraunces (títulos) + Jost (texto), vía Google Fonts.
-- Secciones: hero limpio con sello giratorio, cinta marquee, nosotros, feed de Instagram, mapa de ubicación y frase de cierre.
-- **Fotos reales**: el sitio incrusta el feed oficial de Instagram de [@carminiacafe](https://www.instagram.com/carminiacafe/), así las fotos siempre son las del local y se actualizan solas.
-- **Ubicación**: mapa interactivo de Google Maps incrustado con el pin exacto del café, más botón "Cómo llegar".
-- Animaciones: aparición al hacer scroll (IntersectionObserver), hojas flotantes, hovers. Respeta `prefers-reduced-motion`.
-- Diseño responsive. Un solo archivo, JS mínimo. Sin fotos de stock.
+## Architecture (separation of concerns)
 
-## Cómo verla
+```
+src/
+  lib/
+    calc/        Pure, deterministic calculation engine (+ unit tests)
+    data/        Provider data + editorial benchmarks (easy to hand-edit)
+    affiliate/   Link/monetization config — the ONLY place links are decided
+    profile/     Browser persistence of the driver's saved profile
+  components/    UI primitives + tools (client) + comparison table
+  app/           Routes, SEO (sitemap/robots), metadata, JSON-LD
+```
 
-Abrí `index.html` en el navegador, o publicala con GitHub Pages (Settings → Pages → rama principal, carpeta `/`).
+The calculation engine (`src/lib/calc`) has **no UI or storage dependencies**
+and is fully unit-tested, so results are identical everywhere they appear.
 
-> Nota: el feed de Instagram y el mapa incrustados cargan desde Instagram/Google, por lo que necesitan conexión y se ven mejor con el sitio publicado (no siempre renderizan abriendo el archivo localmente).
+## Run locally
 
-## Datos a ajustar
+Requires Node 18.18+ (Node 22 recommended).
 
-Los horarios son de ejemplo — editalos directamente en `index.html` (sección `#visitanos`).
+```bash
+npm install
+npm run dev      # http://localhost:3000
+```
+
+Other scripts:
+
+```bash
+npm test         # run the calculation-engine unit tests (vitest)
+npm run build    # production build
+npm run start    # serve the production build
+npm run lint     # eslint
+npm run typecheck
+```
+
+## Monetization status
+
+No affiliate relationship is confirmed yet. Links point to providers' public
+pages and earn nothing until a program is verified and set to `CONFIRMED` in
+`src/lib/affiliate/config.ts`. Provider records show `CONFIRMED` / `PENDING` /
+`UNKNOWN` honestly. See `/how-we-make-money`.
+
+## Not done on purpose
+
+No domain, no deploy, no bulk SEO articles. This is a focused, real-product MVP.
